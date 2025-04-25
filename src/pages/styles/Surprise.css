@@ -1,0 +1,374 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.darkTheme {
+    background-color: #121212;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.button {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ff64ff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    z-index: 100;
+}
+
+.button:hover {
+    background-color: rgba(255, 100, 255, 0.2);
+    box-shadow: 0 0 20px rgba(255, 100, 255, 0.5);
+}
+
+.heart-game {
+    width: 100%;
+    height: 80%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 40px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+    opacity: 1;
+    z-index: 10; /* Ensure hearts are clickable */
+    /* Add a padding to increase clickable area */
+    padding: 15px;
+    margin: -15px;
+}
+
+.floating-heart:hover {
+    transform: scale(1.2);
+}
+
+.big-heart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 150px;
+    color: #ff64ff;
+    transition: all 1s ease;
+    text-shadow: 0 0 20px rgba(255, 100, 255, 0.8);
+    z-index: 10;
+}
+
+.big-heart.revealed {
+    transform: translate(-50%, -50%) scale(1);
+    animation: pulse 2s infinite alternate;
+}
+
+.message {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 1s ease;
+    font-size: 2rem;
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 100, 255, 0.8);
+    z-index: 10;
+    width: 100%;
+    text-align: center;
+}
+
+.message.revealed {
+    opacity: 1;
+}
+
+.heart-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.heart-tank-container {
+    position: absolute;
+    bottom: 80px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 20;
+}
+
+.heart-tank {
+    width: 80px;
+    height: 120px;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.1);
+    clip-path: path('M40,20 a20,20 0 0,1 40,0 a20,20 0 0,1 0,25 l-40,40 l-40,-40 a20,20 0 0,1 0,-25 a20,20 0 0,1 40,0 z');
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(255, 100, 255, 0.6);
+    border: 2px solid rgba(255, 100, 255, 0.8);
+}
+
+.heart-tank-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, #ff64ff, #ff9dff);
+    transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 10px #ff64ff;
+    animation: glow 2s infinite alternate;
+}
+
+/* Add these shimmers inside the heart tank fill */
+.heart-tank-fill::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 300%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(30deg);
+    animation: shimmer 3s infinite;
+    pointer-events: none;
+}
+
+/* Add these styles for the cat game */
+
+.cat-game {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    top: 55%;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 1s ease-in-out;
+    z-index: 30;
+}
+
+.cat-instruction {
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px rgba(255, 100, 255, 0.7);
+    animation: pulse 2s infinite alternate;
+}
+
+.cats-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cat {
+    font-size: 4rem;
+    position: absolute;
+    transition: all 0.5s ease;
+}
+
+.cat-left {
+    left: 30%;
+    transform: translateX(-50%);
+}
+
+.cat-right {
+    right: 30%;
+    transform: translateX(50%);
+}
+
+.cat-left.kissing {
+    left: 50%;
+    transform: translateX(-120%);
+}
+
+.kiss-effects {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.heart-float {
+    position: absolute;
+    font-size: 20px;
+    animation: heartRise 2s ease-out forwards;
+}
+
+@keyframes heartRise {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(0.5);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100px) scale(1.5);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(10deg);
+    }
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+    100% {
+        transform: translateX(-100vw) translateY(100vh);
+    }
+}
+
+@keyframes scrollRight {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+    100% {
+        transform: translateX(100vw) translateY(100vh);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 5px #ff64ff;
+    }
+    100% {
+        box-shadow: 0 0 15px #ff64ff;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%) rotate(30deg);
+    }
+    100% {
+        transform: translateX(100%) rotate(30deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .floating-heart {
+        font-size: 30px;
+    }
+    
+    .big-heart {
+        font-size: 120px;
+    }
+    
+    .message {
+        font-size: 1.5rem;
+    }
+
+    .heart-tank-container {
+        bottom: 60px;
+        right: 20px;
+    }
+    
+    .heart-tank {
+        width: 70px;
+        height: 100px;
+    }
+
+    .cat {
+        font-size: 3rem;
+    }
+    
+    .cat-instruction {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .floating-heart {
+        font-size: 24px;
+    }
+    
+    .big-heart {
+        font-size: 100px;
+    }
+    
+    .message {
+        font-size: 1.2rem;
+    }
+
+    .heart-tank-container {
+        bottom: 50px;
+        right: 15px;
+    }
+    
+    .heart-tank {
+        width: 60px;
+        height: 90px;
+    }
+
+    .cat {
+        font-size: 2.5rem;
+    }
+    
+    .cat-left {
+        left: 25%;
+    }
+    
+    .cat-right {
+        right: 25%;
+    }
+    
+    .cat-instruction {
+        font-size: 1rem;
+    }
+}

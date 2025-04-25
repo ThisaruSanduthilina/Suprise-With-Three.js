@@ -1,0 +1,147 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #121212;
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* Ensure the container fills the viewport */
+    min-height: 100vh;
+}
+
+.three-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    max-width: 600px;
+    /* Remove extra padding that might be pushing content up */
+    padding: 0;
+    /* Add height to ensure vertical centering works properly */
+    height: auto;
+}
+
+.title {
+    font-size: 3rem;
+    margin-top: 0;
+    margin-bottom: 8rem; /* Increase space between title and button */
+    text-shadow: 0 0 10px rgba(255, 100, 255, 0.8);
+    animation: pulse 2s infinite alternate;
+    text-align: center;
+    width: 100%;
+    right: 0%;
+    left: 50%;
+    letter-spacing: 2px;
+    /* Simplify the positioning */
+    position: absolute;
+    /* Remove unnecessary display flex within the title */
+    display: block;
+    /* Improve readability with line height */
+    line-height: 1.2;
+}
+
+.button {
+    background-color: transparent;
+    color: white;
+    border: 2px solid #ff64ff;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.button:hover {
+    background-color: rgba(255, 100, 255, 0.2);
+    box-shadow: 0 0 20px rgba(255, 100, 255, 0.5);
+    transform: scale(1.05);
+}
+
+.button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.button:hover:before {
+    left: 100%;
+}
+
+/* Make the h1 more prominent with a subtle glow effect */
+@keyframes pulse {
+    0% {
+        text-shadow: 0 0 10px rgba(255, 100, 255, 0.8);
+        transform: scale(1);
+    }
+    100% {
+        text-shadow: 0 0 20px rgba(255, 100, 255, 1), 0 0 30px rgba(255, 100, 255, 0.5);
+        transform: scale(1.03);
+    }
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.2rem;
+    }
+    
+    .button {
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.8rem;
+    }
+    
+    .button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-height: 500px) {
+    .title {
+        margin-bottom: 1.5rem; /* Less space on small height screens */
+    }
+}
